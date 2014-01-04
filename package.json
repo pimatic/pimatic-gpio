@@ -13,7 +13,7 @@
   "homepage": "http://github.com/sweetpi/pimatic",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sweetpi/pimatic.git"
+    "url": "git://github.com/sweetpi/pimatic-gpio.git"
   },
   "dependencies": {
     "onoff": "~0.3.0"
