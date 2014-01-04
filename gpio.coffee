@@ -1,10 +1,12 @@
-# 
-convict = require "convict"
-Q = require 'q'
-assert = require 'cassert'
-Gpio = require('onoff').Gpio
-
 module.exports = (env) ->
+
+  # * pimatic imports.
+  convict = env.require "convict"
+  Q = env.require 'q'
+  assert = env.require 'cassert'
+
+  Gpio = require('onoff').Gpio
+
 
   class GpioPlugin extends env.plugins.Plugin
 
