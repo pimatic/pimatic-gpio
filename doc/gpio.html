@@ -11,29 +11,26 @@
 
     <span class="nv">init: </span><span class="nf">(app, @framework, @config) -&gt;</span>
 
-    <span class="nv">createActuator: </span><span class="nf">(config) =&gt;</span>
+    <span class="nv">createDevice: </span><span class="nf">(config) =&gt;</span>
       <span class="k">return</span> <span class="k">switch</span> <span class="nx">config</span><span class="p">.</span><span class="nx">class</span>
         <span class="k">when</span> <span class="s">&quot;GpioSwitch&quot;</span> 
-          <span class="nx">@framework</span><span class="p">.</span><span class="nx">registerActuator</span><span class="p">(</span><span class="k">new</span> <span class="nx">GpioSwitch</span> <span class="nx">config</span><span class="p">)</span>
+          <span class="nx">@framework</span><span class="p">.</span><span class="nx">registerDevice</span><span class="p">(</span><span class="k">new</span> <span class="nx">GpioSwitch</span> <span class="nx">config</span><span class="p">)</span>
+          <span class="kc">true</span>
+        <span class="k">when</span> <span class="s">&#39;GpioPresents&#39;</span>
+          <span class="nx">@framework</span><span class="p">.</span><span class="nx">registerDevice</span><span class="p">(</span><span class="k">new</span> <span class="nx">GpioPresents</span> <span class="nx">config</span><span class="p">)</span>
           <span class="kc">true</span>
         <span class="k">else</span> <span class="kc">false</span>
 
-    <span class="nv">createSensor: </span><span class="nf">(config) =&gt;</span>
-      <span class="k">return</span> <span class="k">switch</span> <span class="nx">config</span><span class="p">.</span><span class="nx">class</span>
-        <span class="k">when</span> <span class="s">&#39;GpioPresents&#39;</span>
-          <span class="nx">@framework</span><span class="p">.</span><span class="nx">registerSensor</span><span class="p">(</span><span class="k">new</span> <span class="nx">GpioPresents</span> <span class="nx">config</span><span class="p">)</span>
-          <span class="kc">true</span>
-        <span class="k">else</span> <span class="kc">false</span>
 
   <span class="nv">plugin = </span><span class="k">new</span> <span class="nx">GpioPlugin</span>
 
-  <span class="nv">actuatorConfigShema = </span><span class="nx">require</span><span class="p">(</span><span class="s">&quot;./actuator-config-shema&quot;</span><span class="p">)</span>
+  <span class="nv">deviceConfigShema = </span><span class="nx">require</span><span class="p">(</span><span class="s">&quot;./device-config-shema&quot;</span><span class="p">)</span>
 
-  <span class="k">class</span> <span class="nx">GpioSwitch</span> <span class="k">extends</span> <span class="nx">env</span><span class="p">.</span><span class="nx">actuators</span><span class="p">.</span><span class="nx">PowerSwitch</span>
+  <span class="k">class</span> <span class="nx">GpioSwitch</span> <span class="k">extends</span> <span class="nx">env</span><span class="p">.</span><span class="nx">devices</span><span class="p">.</span><span class="nx">PowerSwitch</span>
     <span class="nv">config: </span><span class="kc">null</span>
 
     <span class="nv">constructor: </span><span class="nf">(@config) -&gt;</span>
-      <span class="nv">conf = </span><span class="nx">convict</span> <span class="nx">actuatorConfigShema</span><span class="p">.</span><span class="nx">GpioSwitch</span>
+      <span class="nv">conf = </span><span class="nx">convict</span> <span class="nx">deviceConfigShema</span><span class="p">.</span><span class="nx">GpioSwitch</span>
       <span class="nx">conf</span><span class="p">.</span><span class="nx">load</span> <span class="nx">config</span>
       <span class="nx">conf</span><span class="p">.</span><span class="nx">validate</span><span class="p">()</span>
       <span class="nx">assert</span> <span class="nx">config</span><span class="p">.</span><span class="nx">gpio</span><span class="o">?</span>
@@ -50,11 +47,9 @@
       <span class="nx">assert</span> <span class="nx">state</span> <span class="o">is</span> <span class="kc">on</span> <span class="o">or</span> <span class="nx">state</span> <span class="o">is</span> <span class="kc">off</span>
       <span class="k">return</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">ninvoke</span><span class="p">(</span><span class="nx">@gpio</span><span class="p">,</span> <span class="s">&quot;write&quot;</span><span class="p">,</span> <span class="k">if</span> <span class="nx">state</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="nf">-&gt;</span>
         <span class="nx">@_setState</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
-      <span class="p">)</span>
+      <span class="p">)</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="gpiopresents-sensor">GpioPresents Sensor</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="k">class</span> <span class="nx">GpioPresents</span> <span class="k">extends</span> <span class="nx">env</span><span class="p">.</span><span class="nx">devices</span><span class="p">.</span><span class="nx">PresentsSensor</span>
 
-  <span class="nv">sensorConfigShema = </span><span class="nx">require</span><span class="p">(</span><span class="s">&quot;./sensor-config-shema&quot;</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="gpiopresents-sensor">GpioPresents Sensor</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="k">class</span> <span class="nx">GpioPresents</span> <span class="k">extends</span> <span class="nx">env</span><span class="p">.</span><span class="nx">sensors</span><span class="p">.</span><span class="nx">PresentsSensor</span>
-
-    <span class="nv">constructor: </span><span class="nf">(@config) -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>TODO:</p></div></div><div class="code"><div class="wrapper">      <span class="nv">conf = </span><span class="nx">convict</span> <span class="nx">sensorConfigShema</span><span class="p">.</span><span class="nx">GpioPresents</span>
+    <span class="nv">constructor: </span><span class="nf">(@config) -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>TODO:</p></div></div><div class="code"><div class="wrapper">      <span class="nv">conf = </span><span class="nx">convict</span> <span class="nx">deviceConfigShema</span><span class="p">.</span><span class="nx">GpioPresents</span>
       <span class="nx">conf</span><span class="p">.</span><span class="nx">load</span> <span class="nx">config</span>
       <span class="nx">conf</span><span class="p">.</span><span class="nx">validate</span><span class="p">()</span>
       <span class="nx">assert</span> <span class="nx">config</span><span class="p">.</span><span class="nx">gpio</span><span class="o">?</span>

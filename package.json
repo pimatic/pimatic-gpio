@@ -6,8 +6,7 @@
   "files": [
     "gpio.coffee",
     "README.md",
-    "actuator-config-shema.coffee",
-    "sensor-config-shema.coffee"
+    "device-config-shema.coffee"
   ],
   "version": "0.3.2",
   "homepage": "http://github.com/sweetpi/pimatic",

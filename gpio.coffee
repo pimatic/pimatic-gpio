@@ -12,29 +12,26 @@ module.exports = (env) ->
 
     init: (app, @framework, @config) ->
 
-    createActuator: (config) =>
+    createDevice: (config) =>
       return switch config.class
         when "GpioSwitch" 
-          @framework.registerActuator(new GpioSwitch config)
+          @framework.registerDevice(new GpioSwitch config)
+          true
+        when 'GpioPresents'
+          @framework.registerDevice(new GpioPresents config)
           true
         else false
 
-    createSensor: (config) =>
-      return switch config.class
-        when 'GpioPresents'
-          @framework.registerSensor(new GpioPresents config)
-          true
-        else false
 
   plugin = new GpioPlugin
 
-  actuatorConfigShema = require("./actuator-config-shema")
+  deviceConfigShema = require("./device-config-shema")
 
-  class GpioSwitch extends env.actuators.PowerSwitch
+  class GpioSwitch extends env.devices.PowerSwitch
     config: null
 
     constructor: (@config) ->
-      conf = convict actuatorConfigShema.GpioSwitch
+      conf = convict deviceConfigShema.GpioSwitch
       conf.load config
       conf.validate()
       assert config.gpio?
@@ -53,14 +50,12 @@ module.exports = (env) ->
         @_setState(state)
       )
 
-  sensorConfigShema = require("./sensor-config-shema")
-
   # ##GpioPresents Sensor
-  class GpioPresents extends env.sensors.PresentsSensor
+  class GpioPresents extends env.devices.PresentsSensor
 
     constructor: (@config) ->
       # TODO:
-      conf = convict sensorConfigShema.GpioPresents
+      conf = convict deviceConfigShema.GpioPresents
       conf.load config
       conf.validate()
       assert config.gpio?

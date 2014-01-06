@@ -11,8 +11,15 @@ You can load the plugin by editing your `config.json` to include:
     }
 
 in the `plugins` Array. 
-Actuators can be added bei adding them to the `actuators` Array in the config file.
-Set the `class` attribute to `GpioSwitch`. For example:
+Devices can be added bei adding them to the `devices` Array in the config file.
+Set the `class` attribute to `GpioSwitch`. 
+
+For device configuration options see the [device-config-shema](actuator-config-shema.html) file.
+
+Device examples
+---------------
+
+###GpioSwitch Device
 
     { 
       "id": "led-light",
@@ -21,10 +28,7 @@ Set the `class` attribute to `GpioSwitch`. For example:
       "gpio": 17 
     }
 
-For actuator configuration options see the 
-[actuator-config-shema](actuator-config-shema.html) file.
-
-Sensors are added to the `sensors` Array.
+###GpioPresents Sensor
 
     { 
       "id": "presents-sensor",
@@ -33,5 +37,3 @@ Sensors are added to the `sensors` Array.
       "gpio": 18 
     }
 
-For sensor configuration options see the 
-[sensor-config-shema](actuator-config-shema.html) file.

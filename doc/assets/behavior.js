@@ -35,6 +35,33 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                 "slug": "configuration"
               },
               "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
+                "title": "Device examples",
+                "slug": "device-examples"
+              },
+              "depth": 2,
+              "children": [
+                {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "GpioSwitch Device",
+                    "slug": "gpioswitch-device"
+                  },
+                  "depth": 3
+                }, {
+                  "type": "heading",
+                  "data": {
+                    "level": 3,
+                    "title": "GpioPresents Sensor",
+                    "slug": "gpiopresents-sensor"
+                  },
+                  "depth": 3
+                }
+              ]
             }
           ]
         },
@@ -50,6 +77,33 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "slug": "configuration"
           },
           "depth": 2
+        }, {
+          "type": "heading",
+          "data": {
+            "level": 2,
+            "title": "Device examples",
+            "slug": "device-examples"
+          },
+          "depth": 2,
+          "children": [
+            {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "GpioSwitch Device",
+                "slug": "gpioswitch-device"
+              },
+              "depth": 3
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 3,
+                "title": "GpioPresents Sensor",
+                "slug": "gpiopresents-sensor"
+              },
+              "depth": 3
+            }
+          ]
         }
       ]
     }, {
@@ -65,10 +119,10 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "foldPrefix": "^",
           "name": "CoffeeScript"
         },
-        "sourcePath": "/home/h3llfire/Projektesammlung/2013_pimatic/node_modules/pimatic-gpio/actuator-config-shema.coffee",
-        "projectPath": "actuator-config-shema.coffee",
-        "targetPath": "actuator-config-shema",
-        "pageTitle": "actuator-config-shema",
+        "sourcePath": "/home/h3llfire/Projektesammlung/2013_pimatic/node_modules/pimatic-gpio/device-config-shema.coffee",
+        "projectPath": "device-config-shema.coffee",
+        "targetPath": "device-config-shema",
+        "pageTitle": "device-config-shema",
         "firstHeader": {
           "type": "heading",
           "data": {
@@ -114,37 +168,6 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "depth": 2
         }
       ]
-    }, {
-      "type": "file",
-      "data": {
-        "language": {
-          "nameMatchers": [".coffee", "Cakefile"],
-          "pygmentsLexer": "coffee-script",
-          "multiLineComment": ["###*", " *", " ###", "###", "#", "###"],
-          "strictMultiLineEnd": false,
-          "singleLineComment": ["#"],
-          "ignorePrefix": "}",
-          "foldPrefix": "^",
-          "name": "CoffeeScript"
-        },
-        "sourcePath": "/home/h3llfire/Projektesammlung/2013_pimatic/node_modules/pimatic-gpio/sensor-config-shema.coffee",
-        "projectPath": "sensor-config-shema.coffee",
-        "targetPath": "sensor-config-shema",
-        "pageTitle": "sensor-config-shema",
-        "firstHeader": {
-          "type": "heading",
-          "data": {
-            "level": 1,
-            "title": "gpio actuator configuration options",
-            "slug": "gpio-actuator-configuration-options",
-            "isFileHeader": true
-          },
-          "depth": 1
-        },
-        "title": "gpio actuator configuration options"
-      },
-      "depth": 1,
-      "outline": []
     }
   ];
 

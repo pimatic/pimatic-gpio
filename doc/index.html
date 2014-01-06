@@ -12,8 +12,14 @@
 </code></pre>
 
 <p>in the <code>plugins</code> Array. 
-Actuators can be added bei adding them to the <code>actuators</code> Array in the config file.
-Set the <code>class</code> attribute to <code>GpioSwitch</code>. For example:</p>
+Devices can be added bei adding them to the <code>devices</code> Array in the config file.
+Set the <code>class</code> attribute to <code>GpioSwitch</code>. </p>
+
+<p>For device configuration options see the <a href="actuator-config-shema.html">device-config-shema</a> file.</p>
+
+<h2 id="device-examples">Device examples</h2>
+
+<h3 id="gpioswitch-device">GpioSwitch Device</h3>
 
 <pre><code>{ 
   "id": "led-light",
@@ -23,10 +29,7 @@ Set the <code>class</code> attribute to <code>GpioSwitch</code>. For example:</p
 }
 </code></pre>
 
-<p>For actuator configuration options see the 
-<a href="actuator-config-shema.html">actuator-config-shema</a> file.</p>
-
-<p>Sensors are added to the <code>sensors</code> Array.</p>
+<h3 id="gpiopresents-sensor">GpioPresents Sensor</h3>
 
 <pre><code>{ 
   "id": "presents-sensor",
@@ -34,7 +37,4 @@ Set the <code>class</code> attribute to <code>GpioSwitch</code>. For example:</p
   "name": "motion detector",
   "gpio": 18 
 }
-</code></pre>
-
-<p>For sensor configuration options see the 
-<a href="actuator-config-shema.html">sensor-config-shema</a> file.</p></div></div></div></div></body></html>
+</code></pre></div></div></div></div></body></html>
