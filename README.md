@@ -1,6 +1,7 @@
 pimatic gpio plugin
 =======================
-Actuators and sensors for the raspberry pi gpio pins.
+Actuators and sensors for the raspberry pi gpio pins. This plugin uses the node.js module
+[onoff](https://github.com/fivdi/onoff).  
 
 Configuration
 -------------
@@ -15,6 +16,10 @@ Devices can be added bei adding them to the `devices` Array in the config file.
 Set the `class` attribute to `GpioSwitch`. 
 
 For device configuration options see the [device-config-shema](actuator-config-shema.html) file.
+
+GPIO Pin Numbering
+-------------
+Use the GPIO numbers from the [RPi Low-level peripherals wiki page](http://elinux.org/RPi_Low-level_peripherals#General_Purpose_Input.2FOutput_.28GPIO.29). 
 
 Device examples
 ---------------
