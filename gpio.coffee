@@ -42,11 +42,11 @@ module.exports = (env) ->
       @gpio = new Gpio config.gpio, 'out'
 
     getState: () ->
-      return Q.fcall -> @_state
+      return Q.fcall => @_state
         
     changeStateTo: (state) ->
       assert state is on or state is off
-      return Q.ninvoke(@gpio, "write", if state then 1 else 0).then( () ->
+      return Q.ninvoke(@gpio, "write", if state then 1 else 0).then( () =>
         @_setState(state)
       )
 
