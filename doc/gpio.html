@@ -41,11 +41,11 @@
       <span class="vi">@gpio = </span><span class="k">new</span> <span class="nx">Gpio</span> <span class="nx">config</span><span class="p">.</span><span class="nx">gpio</span><span class="p">,</span> <span class="s">&#39;out&#39;</span>
 
     <span class="nv">getState: </span><span class="p">()</span> <span class="nf">-&gt;</span>
-      <span class="k">return</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">fcall</span> <span class="nf">-&gt;</span> <span class="nx">@_state</span>
+      <span class="k">return</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">fcall</span> <span class="o">=&gt;</span> <span class="nx">@_state</span>
         
     <span class="nv">changeStateTo: </span><span class="nf">(state) -&gt;</span>
       <span class="nx">assert</span> <span class="nx">state</span> <span class="o">is</span> <span class="kc">on</span> <span class="o">or</span> <span class="nx">state</span> <span class="o">is</span> <span class="kc">off</span>
-      <span class="k">return</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">ninvoke</span><span class="p">(</span><span class="nx">@gpio</span><span class="p">,</span> <span class="s">&quot;write&quot;</span><span class="p">,</span> <span class="k">if</span> <span class="nx">state</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="nf">-&gt;</span>
+      <span class="k">return</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">ninvoke</span><span class="p">(</span><span class="nx">@gpio</span><span class="p">,</span> <span class="s">&quot;write&quot;</span><span class="p">,</span> <span class="k">if</span> <span class="nx">state</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="p">()</span> <span class="o">=&gt;</span>
         <span class="nx">@_setState</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
       <span class="p">)</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="gpiopresents-sensor">GpioPresents Sensor</h2></div></div></div><div class="segment"><div class="code"><div class="wrapper">  <span class="k">class</span> <span class="nx">GpioPresents</span> <span class="k">extends</span> <span class="nx">env</span><span class="p">.</span><span class="nx">devices</span><span class="p">.</span><span class="nx">PresentsSensor</span>
 

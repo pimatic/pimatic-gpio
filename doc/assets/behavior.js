@@ -39,6 +39,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 2,
+                "title": "GPIO Pin Numbering",
+                "slug": "gpio-pin-numbering"
+              },
+              "depth": 2
+            }, {
+              "type": "heading",
+              "data": {
+                "level": 2,
                 "title": "Device examples",
                 "slug": "device-examples"
               },
@@ -75,6 +83,14 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
             "level": 2,
             "title": "Configuration",
             "slug": "configuration"
+          },
+          "depth": 2
+        }, {
+          "type": "heading",
+          "data": {
+            "level": 2,
+            "title": "GPIO Pin Numbering",
+            "slug": "gpio-pin-numbering"
           },
           "depth": 2
         }, {
@@ -174,6 +190,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
   links = {
     "pimatic framework": "..",
     "cron": "../pimatic-cron",
+    "datalogger": "../pimatic-datalogger",
     "filebrowser": "../pimatic-filebrowser",
     "gpio": "../pimatic-gpio",
     "log-reader": "../pimatic-log-reader",
