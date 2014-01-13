@@ -65,12 +65,7 @@ module.exports = (env) ->
       @inverted = conf.get 'inverted'
       @gpio = new Gpio config.gpio, 'in', 'both'
 
-      Q.ninvoke(@gpio, 'read').then( (value) =>
-        @_setPresentValue value 
-      ).catch( (err) ->
-        env.logger.error err.message
-        env.logger.debug err.stack
-      ).done()
+      @_readPresentValue().done()
 
       @gpio.watch (err, value) =>
         if err?
@@ -84,6 +79,20 @@ module.exports = (env) ->
       state = (if value is 1 then yes else no)
       if @inverted then state = not state
       @_setPresent state
+
+    _readPresentValue: ->
+      Q.ninvoke(@gpio, 'read').then( (value) =>
+        @_setPresentValue value
+        return @_present 
+      )
+
+    getSensorValue: (name) ->
+      switch name
+        when "present"
+          return if @_present? then Q(@_present)
+          else @_readPresentValue()
+
+        else throw new Error "Illegal sensor value name"
 
   # For testing...
   plugin.GpioSwitch = GpioSwitch
