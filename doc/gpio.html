@@ -59,12 +59,7 @@
       <span class="vi">@inverted = </span><span class="nx">conf</span><span class="p">.</span><span class="nx">get</span> <span class="s">&#39;inverted&#39;</span>
       <span class="vi">@gpio = </span><span class="k">new</span> <span class="nx">Gpio</span> <span class="nx">config</span><span class="p">.</span><span class="nx">gpio</span><span class="p">,</span> <span class="s">&#39;in&#39;</span><span class="p">,</span> <span class="s">&#39;both&#39;</span>
 
-      <span class="nx">Q</span><span class="p">.</span><span class="nx">ninvoke</span><span class="p">(</span><span class="nx">@gpio</span><span class="p">,</span> <span class="s">&#39;read&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="nf">(value) =&gt;</span>
-        <span class="nx">@_setPresentValue</span> <span class="nx">value</span> 
-      <span class="p">).</span><span class="nx">catch</span><span class="p">(</span> <span class="nf">(err) -&gt;</span>
-        <span class="nx">env</span><span class="p">.</span><span class="nx">logger</span><span class="p">.</span><span class="nx">error</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span>
-        <span class="nx">env</span><span class="p">.</span><span class="nx">logger</span><span class="p">.</span><span class="nx">debug</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span>
-      <span class="p">).</span><span class="nx">done</span><span class="p">()</span>
+      <span class="nx">@_readPresentValue</span><span class="p">().</span><span class="nx">done</span><span class="p">()</span>
 
       <span class="nx">@gpio</span><span class="p">.</span><span class="nx">watch</span> <span class="nf">(err, value) =&gt;</span>
         <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
@@ -77,7 +72,21 @@
       <span class="nx">assert</span> <span class="nx">value</span> <span class="o">is</span> <span class="mi">1</span> <span class="o">or</span> <span class="nx">value</span> <span class="o">is</span> <span class="mi">0</span>
       <span class="nv">state = </span><span class="p">(</span><span class="k">if</span> <span class="nx">value</span> <span class="o">is</span> <span class="mi">1</span> <span class="k">then</span> <span class="kc">yes</span> <span class="k">else</span> <span class="kc">no</span><span class="p">)</span>
       <span class="k">if</span> <span class="nx">@inverted</span> <span class="k">then</span> <span class="nv">state = </span><span class="o">not</span> <span class="nx">state</span>
-      <span class="nx">@_setPresent</span> <span class="nx">state</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>For testing...</p></div></div><div class="code"><div class="wrapper">  <span class="nv">plugin.GpioSwitch = </span><span class="nx">GpioSwitch</span>
+      <span class="nx">@_setPresent</span> <span class="nx">state</span>
+
+    <span class="nv">_readPresentValue: </span><span class="nf">-&gt;</span>
+      <span class="nx">Q</span><span class="p">.</span><span class="nx">ninvoke</span><span class="p">(</span><span class="nx">@gpio</span><span class="p">,</span> <span class="s">&#39;read&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="nf">(value) =&gt;</span>
+        <span class="nx">@_setPresentValue</span> <span class="nx">value</span>
+        <span class="k">return</span> <span class="nx">@_present</span> 
+      <span class="p">)</span>
+
+    <span class="nv">getSensorValue: </span><span class="nf">(name) -&gt;</span>
+      <span class="k">switch</span> <span class="nx">name</span>
+        <span class="k">when</span> <span class="s">&quot;present&quot;</span>
+          <span class="k">return</span> <span class="k">if</span> <span class="nx">@_present</span><span class="o">?</span> <span class="k">then</span> <span class="nx">Q</span><span class="p">(</span><span class="nx">@_present</span><span class="p">)</span>
+          <span class="k">else</span> <span class="nx">@_readPresentValue</span><span class="p">()</span>
+
+        <span class="k">else</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Illegal sensor value name&quot;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>For testing...</p></div></div><div class="code"><div class="wrapper">  <span class="nv">plugin.GpioSwitch = </span><span class="nx">GpioSwitch</span>
   <span class="nv">plugin.GpioPresents = </span><span class="nx">GpioPresents</span>
 
   <span class="k">return</span> <span class="nx">plugin</span></div></div></div></div></body></html>
