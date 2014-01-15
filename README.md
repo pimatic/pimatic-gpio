@@ -33,11 +33,11 @@ Device examples
       "gpio": 17 
     }
 
-###GpioPresents Sensor
+###GpioPresence Sensor
 
     { 
-      "id": "presents-sensor",
-      "class": "GpioPresents", 
+      "id": "presence-sensor",
+      "class": "GpioPresence", 
       "name": "motion detector",
       "gpio": 18 
     }

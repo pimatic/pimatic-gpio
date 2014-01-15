@@ -17,8 +17,8 @@ module.exports = (env) ->
         when "GpioSwitch" 
           @framework.registerDevice(new GpioSwitch config)
           true
-        when 'GpioPresents'
-          @framework.registerDevice(new GpioPresents config)
+        when 'GpioPresence'
+          @framework.registerDevice(new GpioPresence config)
           true
         else false
 
@@ -50,12 +50,12 @@ module.exports = (env) ->
         @_setState(state)
       )
 
-  # ##GpioPresents Sensor
-  class GpioPresents extends env.devices.PresentsSensor
+  # ##GpioPresence Sensor
+  class GpioPresence extends env.devices.PresenceSensor
 
     constructor: (@config) ->
       # TODO:
-      conf = convict deviceConfigShema.GpioPresents
+      conf = convict deviceConfigShema.GpioPresence
       conf.load config
       conf.validate()
       assert config.gpio?
@@ -72,30 +72,25 @@ module.exports = (env) ->
           env.logger.error err.message
           env.logger.debug err.stack
         else
-          @_setPresentValue value
+          @_setPresenceValue value
 
-    _setPresentValue: (value) ->
+    _setPresenceValue: (value) ->
       assert value is 1 or value is 0
       state = (if value is 1 then yes else no)
       if @inverted then state = not state
-      @_setPresent state
+      @_setPresence state
 
     _readPresentValue: ->
       Q.ninvoke(@gpio, 'read').then( (value) =>
-        @_setPresentValue value
-        return @_present 
+        @_setPresenceValue value
+        return @_presence 
       )
 
-    getSensorValue: (name) ->
-      switch name
-        when "present"
-          return if @_present? then Q(@_present)
-          else @_readPresentValue()
+    getPresence: () -> if @_presence? then Q(@_presence) else @_readPresentValue()
 
-        else throw new Error "Illegal sensor value name"
 
   # For testing...
   plugin.GpioSwitch = GpioSwitch
-  plugin.GpioPresents = GpioPresents
+  plugin.GpioPresence = GpioPresence
 
   return plugin

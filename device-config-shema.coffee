@@ -7,7 +7,7 @@ module.exports =
       doc: "The gpio pin"
       format: "int"
       default: null
-  GpioPresents:
+  GpioPresence:
     gpio:
       doc: "The gpio pin"
       format: "int"
