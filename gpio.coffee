@@ -5,8 +5,7 @@ module.exports = (env) ->
   Q = env.require 'q'
   assert = env.require 'cassert'
 
-  Gpio = require('onoff').Gpio
-
+  Gpio = (if env.Gpio? then env.Gpio else require('onoff').Gpio)
 
   class GpioPlugin extends env.plugins.Plugin
 
@@ -66,7 +65,7 @@ module.exports = (env) ->
       @inverted = conf.get 'inverted'
       @gpio = new Gpio config.gpio, 'in', 'both'
 
-      @_readPresentValue().done()
+      @_readPresenceValue().done()
 
       @gpio.watch (err, value) =>
         if err?
@@ -82,7 +81,7 @@ module.exports = (env) ->
       if @inverted then state = not state
       @_setPresence state
 
-    _readPresentValue: ->
+    _readPresenceValue: ->
       Q.ninvoke(@gpio, 'read').then( (value) =>
         @_setPresenceValue value
         return @_presence 
