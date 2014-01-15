@@ -40,6 +40,7 @@ module.exports = (env) ->
       @id = config.id
 
       @gpio = new Gpio config.gpio, 'out'
+      super()
 
     getState: () ->
       return Q.fcall => @_state
@@ -73,6 +74,7 @@ module.exports = (env) ->
           env.logger.debug err.stack
         else
           @_setPresenceValue value
+      super()
 
     _setPresenceValue: (value) ->
       assert value is 1 or value is 0
