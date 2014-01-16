@@ -5,7 +5,7 @@ module.exports = (env) ->
   Q = env.require 'q'
   assert = env.require 'cassert'
 
-  Gpio = (if env.Gpio? then env.Gpio else require('onoff').Gpio)
+  Gpio = env.Gpio or require('onoff').Gpio
 
   class GpioPlugin extends env.plugins.Plugin
 
