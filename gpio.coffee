@@ -45,7 +45,7 @@ module.exports = (env) ->
       super()
 
     getState: () ->
-      return Q.fcall => @_state
+      return Q @_state
         
     changeStateTo: (state) ->
       assert state is on or state is off
