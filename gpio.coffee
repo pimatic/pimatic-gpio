@@ -12,6 +12,9 @@ module.exports = (env) ->
     init: (app, @framework, @config) ->
 
     createDevice: (config) =>
+      #some legacy support:
+      if config.class is 'GpioPresents' then config.class = 'GpioPresence'
+
       return switch config.class
         when "GpioSwitch" 
           @framework.registerDevice(new GpioSwitch config)
@@ -87,7 +90,7 @@ module.exports = (env) ->
         return @_presence 
       )
 
-    getPresence: () -> if @_presence? then Q(@_presence) else @_readPresentValue()
+    getPresence: () -> if @_presence? then Q(@_presence) else @_readPresenceValue()
 
 
   # For testing...
