@@ -64,8 +64,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "type": "heading",
                   "data": {
                     "level": 3,
-                    "title": "GpioPresents Sensor",
-                    "slug": "gpiopresents-sensor"
+                    "title": "GpioPresence Sensor",
+                    "slug": "gpiopresence-sensor"
                   },
                   "depth": 3
                 }
@@ -114,8 +114,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "type": "heading",
               "data": {
                 "level": 3,
-                "title": "GpioPresents Sensor",
-                "slug": "gpiopresents-sensor"
+                "title": "GpioPresence Sensor",
+                "slug": "gpiopresence-sensor"
               },
               "depth": 3
             }
@@ -178,8 +178,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "type": "heading",
           "data": {
             "level": 2,
-            "title": "GpioPresents Sensor",
-            "slug": "gpiopresents-sensor"
+            "title": "GpioPresence Sensor",
+            "slug": "gpiopresence-sensor"
           },
           "depth": 2
         }
@@ -201,7 +201,8 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
     "redirect": "../pimatic-redirect",
     "rest-api": "../pimatic-rest-api",
     "sispmctl": "../pimatic-sispmctl",
-    "speak-api": "../pimatic-speak-api"
+    "speak-api": "../pimatic-speak-api",
+    "voice-recognition": "../pimatic-voice-recognition"
   };
 
   nav$ = null;

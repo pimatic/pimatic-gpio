@@ -10,7 +10,7 @@
     "README.md",
     "device-config-shema.coffee"
   ],
-  "version": "0.4.2",
+  "version": "0.5.0",
   "homepage": "http://github.com/sweetpi/pimatic",
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
     "onoff": "~0.3.0"
   },
   "peerDependencies": {
-    "pimatic": "0.4.*"
+    "pimatic": "0.5.*"
   },
   "engines": {
     "node": ">0.8.x",
