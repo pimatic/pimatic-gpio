@@ -27,13 +27,13 @@ module.exports = (env) ->
 
   plugin = new GpioPlugin
 
-  deviceConfigShema = require("./device-config-shema")
+  deviceConfigSchema = require("./device-config-schema")
 
   class GpioSwitch extends env.devices.PowerSwitch
     config: null
 
     constructor: (@config) ->
-      conf = convict deviceConfigShema.GpioSwitch
+      conf = convict deviceConfigSchema.GpioSwitch
       conf.load config
       conf.validate()
       assert config.gpio?
@@ -58,7 +58,7 @@ module.exports = (env) ->
 
     constructor: (@config) ->
       # TODO:
-      conf = convict deviceConfigShema.GpioPresence
+      conf = convict deviceConfigSchema.GpioPresence
       conf.load config
       conf.validate()
       assert config.gpio?

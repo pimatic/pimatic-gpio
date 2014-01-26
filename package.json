@@ -8,7 +8,7 @@
     "test",
     "gpio.coffee",
     "README.md",
-    "device-config-shema.coffee"
+    "device-config-schema.coffee"
   ],
   "version": "0.5.0",
   "homepage": "http://github.com/pimatic/pimatic",
