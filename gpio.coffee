@@ -4,6 +4,7 @@ module.exports = (env) ->
   convict = env.require "convict"
   Q = env.require 'q'
   assert = env.require 'cassert'
+  _ = env.require 'lodash'
 
   Gpio = env.Gpio or require('onoff').Gpio
 
@@ -33,7 +34,7 @@ module.exports = (env) ->
     config: null
 
     constructor: (@config) ->
-      conf = convict deviceConfigSchema.GpioSwitch
+      conf = convict _.cloneDeep(deviceConfigSchema.GpioSwitch)
       conf.load config
       conf.validate()
       assert config.gpio?
@@ -58,7 +59,7 @@ module.exports = (env) ->
 
     constructor: (@config) ->
       # TODO:
-      conf = convict deviceConfigSchema.GpioPresence
+      conf = convict _.cloneDeep(deviceConfigSchema.GpioPresence)
       conf.load config
       conf.validate()
       assert config.gpio?
