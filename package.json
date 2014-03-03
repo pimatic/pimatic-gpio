@@ -10,7 +10,7 @@
     "README.md",
     "device-config-schema.coffee"
   ],
-  "version": "0.6.0",
+  "version": "0.6.1",
   "homepage": "http://github.com/pimatic/pimatic",
   "repository": {
     "type": "git",
