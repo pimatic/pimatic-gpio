@@ -42,7 +42,17 @@ module.exports = (env) ->
       @name = config.name
       @id = config.id
 
-      @gpio = new Gpio config.gpio, 'out'
+      @gpio = new Gpio config.gpio, 'out', 'both'
+
+      # Watch for state changes from outside
+      @gpio.watch (err, value) =>
+        if err?
+          env.logger.error err.message
+          env.logger.debug err.stack
+        else
+          state = (if value is 1 then yes else no)
+          @_setState(state)
+
       super()
 
     getState: () ->
