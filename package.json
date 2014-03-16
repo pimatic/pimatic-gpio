@@ -10,7 +10,7 @@
     "README.md",
     "device-config-schema.coffee"
   ],
-  "version": "0.6.1",
+  "version": "0.7.0",
   "homepage": "http://github.com/pimatic/pimatic",
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
     "onoff": "~0.3.0"
   },
   "peerDependencies": {
-    "pimatic": "0.6.*"
+    "pimatic": "0.7.*"
   },
   "engines": {
     "node": ">0.8.x",
