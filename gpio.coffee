@@ -56,7 +56,12 @@ module.exports = (env) ->
       super()
 
     getState: () ->
-      return Q @_state
+      if @_state? then Q @_state
+      else Q.ninvoke(@gpio, 'read').then( (value) =>
+        @_state = (if value is 1 then yes else no)
+        return @_state
+      )
+
         
     changeStateTo: (state) ->
       assert state is on or state is off
