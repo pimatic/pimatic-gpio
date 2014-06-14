@@ -13,32 +13,25 @@ module.exports = (env) ->
     init: (app, @framework, @config) ->
 
     createDevice: (config) =>
-      #some legacy support:
-      if config.class is 'GpioPresents' then config.class = 'GpioPresence'
 
-      return switch config.class
-        when "GpioSwitch" 
-          @framework.registerDevice(new GpioSwitch config)
-          true
-        when 'GpioPresence'
-          @framework.registerDevice(new GpioPresence config)
-          true
-        else false
+      deviceConfigDef = require("./device-config-schema")
+
+      @framework.registerDeviceClass("GpioPresence", {
+        configDef: deviceConfigDef.GpioPresence, 
+        createCallback: (config) => new GpioPresence(config)
+      })
+
+      @framework.registerDeviceClass("GpioSwitch", {
+        configDef: deviceConfigDef.GpioSwitch, 
+        createCallback: (config) => new GpioSwitch(config)
+      })
 
 
   plugin = new GpioPlugin
 
-  deviceConfigSchema = require("./device-config-schema")
-
   class GpioSwitch extends env.devices.PowerSwitch
-    config: null
 
     constructor: (@config) ->
-      conf = convict _.cloneDeep(deviceConfigSchema.GpioSwitch)
-      conf.load config
-      conf.validate()
-      assert config.gpio?
-
       @name = config.name
       @id = config.id
 
@@ -73,16 +66,9 @@ module.exports = (env) ->
   class GpioPresence extends env.devices.PresenceSensor
 
     constructor: (@config) ->
-      # TODO:
-      conf = convict _.cloneDeep(deviceConfigSchema.GpioPresence)
-      conf.load config
-      conf.validate()
-      assert config.gpio?
-
       @id = config.id
       @name = config.name
-      @inverted = conf.get 'inverted'
-      @gpio = new Gpio config.gpio, 'in', 'both'
+      @gpio = new Gpio(config.gpio, 'in', 'both')
 
       @_readPresenceValue().done()
 
@@ -97,7 +83,7 @@ module.exports = (env) ->
     _setPresenceValue: (value) ->
       assert value is 1 or value is 0
       state = (if value is 1 then yes else no)
-      if @inverted then state = not state
+      if @config.inverted then state = not state
       @_setPresence state
 
     _readPresenceValue: ->

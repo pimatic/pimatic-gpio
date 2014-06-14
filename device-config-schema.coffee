@@ -1,18 +1,13 @@
-# #gpio actuator configuration options
-
-# Defines a `node-convict` config-schema and exports it.
 module.exports =
   GpioSwitch:
     gpio:
-      doc: "The gpio pin"
-      format: "int"
-      default: null
+      description: "The gpio pin"
+      type: "number"
   GpioPresence:
     gpio:
-      doc: "The gpio pin"
-      format: "int"
-      default: null
+      description: "The gpio pin"
+      type: "number"
     inverted:
-      doc: "LOW = present?"
-      format: Boolean
+      description: "LOW = present?"
+      type: "boolean"
       default: false
