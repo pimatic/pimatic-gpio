@@ -12,8 +12,6 @@ module.exports = (env) ->
 
     init: (app, @framework, @config) ->
 
-    createDevice: (config) =>
-
       deviceConfigDef = require("./device-config-schema")
 
       @framework.registerDeviceClass("GpioPresence", {

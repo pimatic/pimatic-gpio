@@ -15,48 +15,46 @@ module.exports = (env) ->
 
       @plugin = (env.require 'pimatic-gpio') env
       @config = {}
-      @frameworkDummy = {}
+      @frameworkDummy = {
+        registerDeviceClass: sinon.spy()
+      }
 
     describe 'GpioPlugin', =>
       describe '#init()', =>
         it "should init", =>
           @plugin.init(null, @frameworkDummy, @config)
+          assert @frameworkDummy.registerDeviceClass.calledTwice
+          firstCall = @frameworkDummy.registerDeviceClass.getCall(0)
+          assert firstCall.args[0] is "GpioPresence"
+          secondCall = @frameworkDummy.registerDeviceClass.getCall(1)
+          assert secondCall.args[0] is "GpioSwitch"
 
-      describe "#createDevice()", =>
-        it "should create a GpioSwitch", =>
-          registerDevice = sinon.spy()
-          @frameworkDummy.registerDevice = registerDevice
-
-          switchConfig =
-            id: "testSwitch"
-            name: "Test Switch"
-            class: "GpioSwitch"
-            gpio: 1
-
-          @plugin.createDevice switchConfig
-          assert registerDevice.called
-          @gpioSwitch = registerDevice.getCall(0).args[0]
-          assert @gpioSwitch.gpio?
-          assert 1, @gpioSwitch.gpio.pin
-          assert 'out', @gpioSwitch.gpio.direction
+      describe "#createCallback()", =>
 
         it "should create a GpioPresence", =>
-          registerDevice = sinon.spy()
-          @frameworkDummy.registerDevice = registerDevice
-
-          presenceConfig =
+          firstCall = @frameworkDummy.registerDeviceClass.getCall(1)
+          presenceConfig = {
             id: "testPresence"
             name: "Test PresenceSensor"
             class: "GpioPresence"
             gpio: 2
-
-          @plugin.createDevice presenceConfig
-          assert registerDevice.called
-          @gpioPresence = registerDevice.getCall(0).args[0]
+          }
+          @gpioPresence = firstCall.args[1].createCallback(presenceConfig)
           assert @gpioPresence.gpio?
           assert 2, @gpioPresence.gpio.pin
           assert 'in', @gpioPresence.gpio.direction
           assert @gpioPresence.gpio.watchCallback
 
-    describe "GpioSwitch", =>
 
+        it "should create a GpioSwitch", =>
+          secondCall = @frameworkDummy.registerDeviceClass.getCall(1)
+          switchConfig = {
+            id: "testSwitch"
+            name: "Test Switch"
+            class: "GpioSwitch"
+            gpio: 1
+          }
+          @gpioSwitch = secondCall.args[1].createCallback(switchConfig)
+          assert @gpioSwitch.gpio?
+          assert 1, @gpioSwitch.gpio.pin
+          assert 'out', @gpioSwitch.gpio.direction
