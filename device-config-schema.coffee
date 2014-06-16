@@ -7,6 +7,10 @@ module.exports =
       doc: "The gpio pin"
       format: "int"
       default: null
+    inverted:
+      doc: "active low?"
+      format: Boolean
+      default: false
   GpioPresence:
     gpio:
       doc: "The gpio pin"
