@@ -32,7 +32,6 @@ module.exports = (env) ->
     constructor: (@config) ->
       @name = config.name
       @id = config.id
-      @inverted = conf.get 'inverted'
       @gpio = new Gpio config.gpio, 'out', 'both'
 
       # Watch for state changes from outside
@@ -42,7 +41,7 @@ module.exports = (env) ->
           env.logger.debug err.stack
         else
           _state = (if value is 1 then yes else no)
-          if @inverted then state = not _state
+          if @config.inverted then state = not _state
           else state = _state
           @_setState(state)
 
@@ -52,7 +51,7 @@ module.exports = (env) ->
       if @_state? then Q @_state
       else Q.ninvoke(@gpio, 'read').then( (value) =>
         _state = (if value is 1 then yes else no)
-        if @inverted then @_state = not _state
+        if @config.inverted then @_state = not _state
         else @_state = _state
         return @_state
       )
@@ -60,7 +59,7 @@ module.exports = (env) ->
         
     changeStateTo: (state) ->
       assert state is on or state is off
-      if @inverted then _state = not state
+      if @config.inverted then _state = not state
       else _state = state
       return Q.ninvoke(@gpio, "write", if _state then 1 else 0).then( () =>
         @_setState(state)
