@@ -8,7 +8,8 @@
     "test",
     "gpio.coffee",
     "README.md",
-    "device-config-schema.coffee"
+    "device-config-schema.coffee",
+    "gpio-config-schema.coffee"
   ],
   "version": "0.8.0",
   "homepage": "http://github.com/pimatic/pimatic",
@@ -16,6 +17,7 @@
     "type": "git",
     "url": "git://github.com/pimatic/pimatic-gpio.git"
   },
+  "configSchema": "gpio-config-schema.coffee",
   "dependencies": {
     "onoff": "~0.3.0"
   },

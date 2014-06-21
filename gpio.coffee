@@ -1,7 +1,6 @@
 module.exports = (env) ->
 
   # * pimatic imports.
-  convict = env.require "convict"
   Q = env.require 'q'
   assert = env.require 'cassert'
   _ = env.require 'lodash'
