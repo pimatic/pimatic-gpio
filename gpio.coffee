@@ -6,7 +6,7 @@ module.exports = (env) ->
   _ = env.require 'lodash'
 
   Gpio = env.Gpio or require('onoff').Gpio
-  Promise.promisifyAll(Gpio)
+  Promise.promisifyAll(Gpio.prototype)
 
   class GpioPlugin extends env.plugins.Plugin
 
