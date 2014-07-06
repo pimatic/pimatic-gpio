@@ -1,11 +1,12 @@
 module.exports = (env) ->
 
   # * pimatic imports.
-  Q = env.require 'q'
+  Promise = env.require 'bluebird'
   assert = env.require 'cassert'
   _ = env.require 'lodash'
 
   Gpio = env.Gpio or require('onoff').Gpio
+  Promise.promisifyAll(Gpio)
 
   class GpioPlugin extends env.plugins.Plugin
 
@@ -33,6 +34,7 @@ module.exports = (env) ->
       @id = config.id
       @gpio = new Gpio config.gpio, 'out', 'both'
 
+
       # Watch for state changes from outside
       @gpio.watch (err, value) =>
         if err?
@@ -47,8 +49,8 @@ module.exports = (env) ->
       super()
 
     getState: () ->
-      if @_state? then Q @_state
-      else Q.ninvoke(@gpio, 'read').then( (value) =>
+      if @_state? then Promise.resolve @_state
+      @gpio.readAsync().then( (value) =>
         _state = (if value is 1 then yes else no)
         if @config.inverted then @_state = not _state
         else @_state = _state
@@ -60,7 +62,7 @@ module.exports = (env) ->
       assert state is on or state is off
       if @config.inverted then _state = not state
       else _state = state
-      return Q.ninvoke(@gpio, "write", if _state then 1 else 0).then( () =>
+      @gpio.writeAsync(if _state then 1 else 0).then( () =>
         @_setState(state)
       )
 
@@ -89,12 +91,12 @@ module.exports = (env) ->
       @_setPresence state
 
     _readPresenceValue: ->
-      Q.ninvoke(@gpio, 'read').then( (value) =>
+      @gpio.readAsync().then( (value) =>
         @_setPresenceValue value
         return @_presence 
       )
 
-    getPresence: () -> if @_presence? then Q(@_presence) else @_readPresenceValue()
+    getPresence: () -> if @_presence? then Promise.resolve(@_presence) else @_readPresenceValue()
 
 
   # For testing...
