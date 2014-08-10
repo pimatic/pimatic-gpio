@@ -16,23 +16,24 @@ module.exports = (env) ->
       @plugin = (env.require 'pimatic-gpio') env
       @config = {}
       @frameworkDummy = {
-        registerDeviceClass: sinon.spy()
+        deviceManager:
+          registerDeviceClass: sinon.spy()
       }
 
     describe 'GpioPlugin', =>
       describe '#init()', =>
         it "should init", =>
           @plugin.init(null, @frameworkDummy, @config)
-          assert @frameworkDummy.registerDeviceClass.calledTwice
-          firstCall = @frameworkDummy.registerDeviceClass.getCall(0)
+          assert @frameworkDummy.deviceManager.registerDeviceClass.calledTwice
+          firstCall = @frameworkDummy.deviceManager.registerDeviceClass.getCall(0)
           assert firstCall.args[0] is "GpioPresence"
-          secondCall = @frameworkDummy.registerDeviceClass.getCall(1)
+          secondCall = @frameworkDummy.deviceManager.registerDeviceClass.getCall(1)
           assert secondCall.args[0] is "GpioSwitch"
 
       describe "#createCallback()", =>
 
         it "should create a GpioPresence", =>
-          firstCall = @frameworkDummy.registerDeviceClass.getCall(1)
+          firstCall = @frameworkDummy.deviceManager.registerDeviceClass.getCall(1)
           presenceConfig = {
             id: "testPresence"
             name: "Test PresenceSensor"
@@ -47,7 +48,7 @@ module.exports = (env) ->
 
 
         it "should create a GpioSwitch", =>
-          secondCall = @frameworkDummy.registerDeviceClass.getCall(1)
+          secondCall = @frameworkDummy.deviceManager.registerDeviceClass.getCall(1)
           switchConfig = {
             id: "testSwitch"
             name: "Test Switch"

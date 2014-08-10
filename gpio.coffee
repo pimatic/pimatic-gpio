@@ -14,12 +14,12 @@ module.exports = (env) ->
 
       deviceConfigDef = require("./device-config-schema")
 
-      @framework.registerDeviceClass("GpioPresence", {
+      @framework.deviceManager.registerDeviceClass("GpioPresence", {
         configDef: deviceConfigDef.GpioPresence, 
         createCallback: (config) => new GpioPresence(config)
       })
 
-      @framework.registerDeviceClass("GpioSwitch", {
+      @framework.deviceManager.registerDeviceClass("GpioSwitch", {
         configDef: deviceConfigDef.GpioSwitch, 
         createCallback: (config) => new GpioSwitch(config)
       })
