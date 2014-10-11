@@ -24,11 +24,11 @@ module.exports = (env) ->
       describe '#init()', =>
         it "should init", =>
           @plugin.init(null, @frameworkDummy, @config)
-          assert @frameworkDummy.deviceManager.registerDeviceClass.calledTwice
+          assert @frameworkDummy.deviceManager.registerDeviceClass.callCount is 3
           firstCall = @frameworkDummy.deviceManager.registerDeviceClass.getCall(0)
           assert firstCall.args[0] is "GpioPresence"
           secondCall = @frameworkDummy.deviceManager.registerDeviceClass.getCall(1)
-          assert secondCall.args[0] is "GpioSwitch"
+          assert secondCall.args[0] is "GpioContact"
 
       describe "#createCallback()", =>
 
