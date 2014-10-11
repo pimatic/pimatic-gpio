@@ -3,6 +3,7 @@ module.exports ={
   GpioSwitch: {
     title: "GpioSwitch config options"
     type: "object"
+    extensions: ["xConfirm", "xLink", "xOnLabel", "xOffLabel"]
     properties:
       gpio:
         description: "The gpio pin"
@@ -15,6 +16,7 @@ module.exports ={
   GpioPresence: {
     title: "GpioPresence config options"
     type: "object"
+    extensions: ["xLink", "xPresentLabel", "xAbsentLabel"]
     properties:
       gpio:
         description: "The gpio pin"
