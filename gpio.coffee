@@ -19,6 +19,11 @@ module.exports = (env) ->
         createCallback: (config) => new GpioPresence(config)
       })
 
+      @framework.deviceManager.registerDeviceClass("GpioContact", {
+        configDef: deviceConfigDef.GpioContact, 
+        createCallback: (config) => new GpioContact(config)
+      })
+
       @framework.deviceManager.registerDeviceClass("GpioSwitch", {
         configDef: deviceConfigDef.GpioSwitch, 
         createCallback: (config) => new GpioSwitch(config)
@@ -67,6 +72,41 @@ module.exports = (env) ->
       )
 
   # ##GpioPresence Sensor
+  class GpioContact extends env.devices.ContactSensor
+
+    constructor: (@config) ->
+      @id = config.id
+      @name = config.name
+      @gpio = new Gpio(config.gpio, 'in', 'both')
+
+      @_readContactValue().catch( (error) =>
+        env.logger.error err.message
+        env.logger.debug err.stack
+      )
+
+      @gpio.watch (err, value) =>
+        if err?
+          env.logger.error err.message
+          env.logger.debug err.stack
+        else
+          @_setContactValue value
+      super()
+
+    _setContactValue: (value) ->
+      assert value is 1 or value is 0
+      state = (if value is 1 then yes else no)
+      if @config.inverted then state = not state
+      @_setContact state
+
+    _readContactValue: ->
+      @gpio.readAsync().then( (value) =>
+        @_setContactValue value
+        return @_contact 
+      )
+
+    getContact: () -> if @_contact? then Promise.resolve(@_contact) else @_readContactValue()
+
+  # ##GpioPresence Sensor
   class GpioPresence extends env.devices.PresenceSensor
 
     constructor: (@config) ->
@@ -74,7 +114,10 @@ module.exports = (env) ->
       @name = config.name
       @gpio = new Gpio(config.gpio, 'in', 'both')
 
-      @_readPresenceValue().done()
+      @_readPresenceValue().catch( (error) =>
+        env.logger.error err.message
+        env.logger.debug err.stack
+      )
 
       @gpio.watch (err, value) =>
         if err?

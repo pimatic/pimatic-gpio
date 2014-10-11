@@ -13,6 +13,19 @@ module.exports ={
         type: "boolean"
         default: false
   }
+  GpioContact: {
+    title: "GpioContact config options"
+    type: "object"
+    extensions: ["xLink"]
+    properties:
+      gpio:
+        description: "The gpio pin"
+        type: "number"
+      inverted:
+        description: "LOW = closed?"
+        type: "boolean"
+        default: false
+  }
   GpioPresence: {
     title: "GpioPresence config options"
     type: "object"
