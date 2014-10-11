@@ -42,3 +42,12 @@ Device examples
       "gpio": 18 
     }
 
+###GpioContact Sensor
+
+    { 
+      "id": "contact-sensor",
+      "class": "GpioContact", 
+      "name": "contact detector",
+      "gpio": 18 
+    }
+
