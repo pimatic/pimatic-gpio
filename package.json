@@ -11,7 +11,7 @@
     "device-config-schema.coffee",
     "gpio-config-schema.coffee"
   ],
-  "version": "0.8.0",
+  "version": "0.8.1",
   "homepage": "http://github.com/pimatic/pimatic",
   "repository": {
     "type": "git",
