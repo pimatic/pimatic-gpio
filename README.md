@@ -15,7 +15,7 @@ in the `plugins` Array.
 Devices can be added bei adding them to the `devices` Array in the config file.
 Set the `class` attribute to `GpioSwitch`. 
 
-For device configuration options see the [device-config-schema](actuator-config-schema.html) file.
+For device configuration options see the [device-config-schema](device-config-schema.coffee) file.
 
 GPIO Pin Numbering
 -------------
