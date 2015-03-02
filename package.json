@@ -19,7 +19,7 @@
   },
   "configSchema": "gpio-config-schema.coffee",
   "dependencies": {
-    "onoff": "~0.3.0"
+    "onoff": "~1.0.2"
   },
   "peerDependencies": {
     "pimatic": "0.8.*"
