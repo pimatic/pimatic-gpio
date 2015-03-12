@@ -34,12 +34,18 @@ module.exports = (env) ->
 
   class GpioSwitch extends env.devices.PowerSwitch
 
-    constructor: (@config) ->
+    constructor: (@config, lastState) ->
       @name = config.name
       @id = config.id
       @gpio = new Gpio config.gpio, 'out', 'both'
-
-
+      if @config.defaultState
+        @_state = @config.defaultState
+      else
+        @_state = lastState?.state?.value or false
+      @gpio.writeAsync(if @_state then 1 else 0).catch( (error) =>
+        env.logger.error("Couldn't toggle gpio pin: #{error.message}")
+        env.logger.debug(error.stack)
+      ).done()
       # Watch for state changes from outside
       @gpio.watch (err, value) =>
         if err?
@@ -74,10 +80,11 @@ module.exports = (env) ->
   # ##GpioPresence Sensor
   class GpioContact extends env.devices.ContactSensor
 
-    constructor: (@config) ->
+    constructor: (@config, lastState) ->
       @id = config.id
       @name = config.name
       @gpio = new Gpio(config.gpio, 'in', 'both')
+      @_contact = lastState?.contact?.value or false
 
       @_readContactValue().catch( (error) =>
         env.logger.error err.message
@@ -109,10 +116,11 @@ module.exports = (env) ->
   # ##GpioPresence Sensor
   class GpioPresence extends env.devices.PresenceSensor
 
-    constructor: (@config) ->
+    constructor: (@config, lastState) ->
       @id = config.id
       @name = config.name
       @gpio = new Gpio(config.gpio, 'in', 'both')
+      @_presence = lastState?.presence?.value or false
 
       @_readPresenceValue().catch( (error) =>
         env.logger.error err.message
