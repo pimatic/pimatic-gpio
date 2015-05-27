@@ -37,7 +37,7 @@ module.exports = (env) ->
     constructor: (@config, lastState) ->
       @name = config.name
       @id = config.id
-      @gpio = new Gpio config.gpio, 'out', 'both'
+      @gpio = new Gpio config.gpio, 'out'
       if @config.defaultState
         @_state = @config.defaultState
       else
@@ -46,17 +46,7 @@ module.exports = (env) ->
         env.logger.error("Couldn't toggle gpio pin: #{error.message}")
         env.logger.debug(error.stack)
       ).done()
-      # Watch for state changes from outside
-      @gpio.watch (err, value) =>
-        if err?
-          env.logger.error err.message
-          env.logger.debug err.stack
-        else
-          _state = (if value is 1 then yes else no)
-          if @config.inverted then state = not _state
-          else state = _state
-          @_setState(state)
-
+      
       super()
 
     getState: () ->
