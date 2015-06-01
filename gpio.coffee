@@ -38,7 +38,7 @@ module.exports = (env) ->
       @name = config.name
       @id = config.id
       @gpio = new Gpio config.gpio, 'out'
-      if @config.defaultState
+      if @config.defaultState?
         @_state = @config.defaultState
       else
         @_state = lastState?.state?.value or false
