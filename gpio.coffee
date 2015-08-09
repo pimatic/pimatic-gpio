@@ -37,16 +37,14 @@ module.exports = (env) ->
     constructor: (@config, lastState) ->
       @name = config.name
       @id = config.id
-      @gpio = new Gpio config.gpio, 'out'
+
       if @config.defaultState?
         @_state = @config.defaultState
       else
         @_state = lastState?.state?.value or false
-      @gpio.writeAsync(if @_state then 1 else 0).catch( (error) =>
-        env.logger.error("Couldn't toggle gpio pin: #{error.message}")
-        env.logger.debug(error.stack)
-      ).done()
-      
+
+      stateToSet = (if @config.inverted then not @_state else @_state)
+      @gpio = new Gpio config.gpio, 'out', (if stateToSet then "high" else "low")
       super()
 
     getState: () ->
