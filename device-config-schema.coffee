@@ -20,7 +20,7 @@ module.exports ={
   GpioContact: {
     title: "GpioContact config options"
     type: "object"
-    extensions: ["xLink"]
+    extensions: ["xLink", "xOpenedLabel", "xClosedLabel"]
     properties:
       gpio:
         description: "The gpio pin"
