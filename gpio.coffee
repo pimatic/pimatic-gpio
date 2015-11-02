@@ -16,17 +16,17 @@ module.exports = (env) ->
 
       @framework.deviceManager.registerDeviceClass("GpioPresence", {
         configDef: deviceConfigDef.GpioPresence, 
-        createCallback: (config) => new GpioPresence(config)
+        createCallback: (config, lastState) => new GpioPresence(config, lastState)
       })
 
       @framework.deviceManager.registerDeviceClass("GpioContact", {
         configDef: deviceConfigDef.GpioContact, 
-        createCallback: (config) => new GpioContact(config)
+        createCallback: (config, lastState) => new GpioContact(config, lastState)
       })
 
       @framework.deviceManager.registerDeviceClass("GpioSwitch", {
         configDef: deviceConfigDef.GpioSwitch, 
-        createCallback: (config) => new GpioSwitch(config)
+        createCallback: (config, lastState) => new GpioSwitch(config, lastState)
       })
 
 
