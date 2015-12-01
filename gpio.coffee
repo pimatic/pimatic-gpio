@@ -75,8 +75,8 @@ module.exports = (env) ->
       @_contact = lastState?.contact?.value or false
 
       @_readContactValue().catch( (error) =>
-        env.logger.error err.message
-        env.logger.debug err.stack
+        env.logger.error error.message
+        env.logger.debug error.stack
       )
 
       @gpio.watch (err, value) =>
@@ -111,8 +111,8 @@ module.exports = (env) ->
       @_presence = lastState?.presence?.value or false
 
       @_readPresenceValue().catch( (error) =>
-        env.logger.error err.message
-        env.logger.debug err.stack
+        env.logger.error error.message
+        env.logger.debug error.stack
       )
 
       @gpio.watch (err, value) =>
