@@ -24,7 +24,7 @@ Use the GPIO numbers from the [RPi Low-level peripherals wiki page](http://elinu
 Device examples
 ---------------
 
-###GpioSwitch Device
+### GpioSwitch Device
 
     { 
       "id": "led-light",
@@ -33,7 +33,7 @@ Device examples
       "gpio": 17 
     }
 
-###GpioPresence Sensor
+### GpioPresence Sensor
 
     { 
       "id": "presence-sensor",
@@ -42,7 +42,7 @@ Device examples
       "gpio": 18 
     }
 
-###GpioContact Sensor
+### GpioContact Sensor
 
     { 
       "id": "contact-sensor",
