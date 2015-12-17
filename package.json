@@ -27,5 +27,19 @@
   "engines": {
     "node": ">0.8.x",
     "npm": ">1.1.x"
-  }
+  },
+  "contributors": [
+    {
+      "name": "Wiebe Nieuwenhuis",
+      "url": "https://github.com/sweebee"
+    },
+    {
+      "name": "Marcus Wittig",
+      "url": "https://github.com/mwittig"
+    },
+    {
+      "name": "sweet pi - sweet home",
+      "url": "https://github.com/sweetpi"
+    }
+  ]
 }
