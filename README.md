@@ -1,7 +1,7 @@
-pimatic gpio plugin
-=======================
-Actuators and sensors for the raspberry pi gpio pins. This plugin uses the node.js module
-[onoff](https://github.com/fivdi/onoff).  
+pimatic-gpio
+============
+Actuators and sensors for the Raspberry Pi GPIO pins. This plugin uses the node.js module
+[onoff](https://github.com/fivdi/onoff).
 
 Plugin Configuration
 -------------
@@ -16,9 +16,9 @@ in the `plugins` Array.
 Device Configuration
 -------------
 Devices can be added by adding them to the `devices` Array in the config file.
-Set the `class` property to `GpioSwitch`. By default, the device state will be `true , i.e. *on*, *opened*, 
-or *present*, when the GPIO pin is HIGH. If you need the device to be active on LOW, set the 
-property `inverted` to `true`.
+Set the `class` property to `GpioSwitch`, `GpioPresence`, or `GpioContact`, respectively. By default, 
+the device state will be `true` , i.e. *on*, *opened*, or *present*, when the GPIO pin is HIGH. If you need 
+the device to be active on LOW, set the property `inverted` to `true`.
 
 For device configuration options see the [device-config-schema](actuator-config-schema.html) file.
 
@@ -29,13 +29,14 @@ Use the GPIO numbers from the [RPi Low-level peripherals wiki page](http://elinu
 ### Device examples
 
 
-#### GpioSwitch Device
+#### GpioSwitch Device ("active LOW")
 
     { 
       "id": "led-light",
       "class": "GpioSwitch", 
       "name": "led light",
-      "gpio": 17 
+      "gpio": 17,
+      "inverted": true
     }
 
 #### GpioPresence Sensor
