@@ -12,7 +12,7 @@
     "gpio-config-schema.coffee",
     "LICENSE"
   ],
-  "version": "0.8.14",
+  "version": "0.8.15",
   "homepage": "http://github.com/pimatic/pimatic",
   "repository": {
     "type": "git",
