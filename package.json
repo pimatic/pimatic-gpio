@@ -9,7 +9,8 @@
     "gpio.coffee",
     "README.md",
     "device-config-schema.coffee",
-    "gpio-config-schema.coffee"
+    "gpio-config-schema.coffee",
+    "LICENSE"
   ],
   "version": "0.8.13",
   "homepage": "http://github.com/pimatic/pimatic",
@@ -17,12 +18,13 @@
     "type": "git",
     "url": "git://github.com/pimatic/pimatic-gpio.git"
   },
+  "license": "GPL-2.0",
   "configSchema": "gpio-config-schema.coffee",
   "dependencies": {
-    "onoff": "~1.0.2"
+    "onoff": "~1.0.4"
   },
   "peerDependencies": {
-    "pimatic": "0.8.*"
+    "pimatic": ">=0.8.0 <1.0.0"
   },
   "engines": {
     "node": ">0.8.x",
