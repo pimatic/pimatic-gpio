@@ -35,8 +35,8 @@ module.exports = (env) ->
   class GpioSwitch extends env.devices.PowerSwitch
 
     constructor: (@config, lastState) ->
-      @name = config.name
-      @id = config.id
+      @name = @config.name
+      @id = @config.id
 
       if @config.defaultState?
         @_state = @config.defaultState
@@ -44,7 +44,7 @@ module.exports = (env) ->
         @_state = lastState?.state?.value or false
 
       stateToSet = (if @config.inverted then not @_state else @_state)
-      @gpio = new Gpio config.gpio, (if stateToSet then "high" else "low")
+      @gpio = new Gpio @config.gpio, (if stateToSet then "high" else "low")
       super()
 
     getState: () ->
@@ -69,9 +69,9 @@ module.exports = (env) ->
   class GpioContact extends env.devices.ContactSensor
 
     constructor: (@config, lastState) ->
-      @id = config.id
-      @name = config.name
-      @gpio = new Gpio(config.gpio, 'in', 'both')
+      @id = @config.id
+      @name = @config.name
+      @gpio = new Gpio(@config.gpio, 'in', 'both')
       @_contact = lastState?.contact?.value or false
 
       @_readContactValue().catch( (error) =>
@@ -105,9 +105,9 @@ module.exports = (env) ->
   class GpioPresence extends env.devices.PresenceSensor
 
     constructor: (@config, lastState) ->
-      @id = config.id
-      @name = config.name
-      @gpio = new Gpio(config.gpio, 'in', 'both')
+      @id = @config.id
+      @name = @config.name
+      @gpio = new Gpio(@config.gpio, 'in', 'both')
       @_presence = lastState?.presence?.value or false
 
       @_readPresenceValue().catch( (error) =>
