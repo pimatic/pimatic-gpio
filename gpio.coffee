@@ -44,7 +44,9 @@ module.exports = (env) ->
         @_state = lastState?.state?.value or false
 
       stateToSet = (if @config.inverted then not @_state else @_state)
-      @gpio = new Gpio @config.gpio, (if stateToSet then "high" else "low")
+      options =
+        debounceTimeout: @config.debounceTimeout if @config.debounceTimeout?
+      @gpio = new Gpio @config.gpio, (if stateToSet then "high" else "low"), options
       super()
 
     getState: () ->

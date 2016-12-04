@@ -16,6 +16,10 @@ module.exports ={
         description: "State to set on startup, if not given, last state will be restored"
         type: "boolean"
         required: false
+      debounceTimeout:
+        description: "Optional timeout in ms to software debounce the switch"
+        type: "number"
+        required: false
   }
   GpioContact: {
     title: "GpioContact config options"
