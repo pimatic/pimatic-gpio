@@ -33,6 +33,10 @@ module.exports ={
         description: "LOW = closed?"
         type: "boolean"
         default: false
+      debounceTimeout:
+        description: "Optional timeout in ms to software debounce the switch"
+        type: "number"
+        required: false
   }
   GpioPresence: {
     title: "GpioPresence config options"
@@ -46,5 +50,9 @@ module.exports ={
         description: "LOW = present?"
         type: "boolean"
         default: false
+      debounceTimeout:
+        description: "Optional timeout in ms to software debounce the switch"
+        type: "number"
+        required: false
   }
 }
