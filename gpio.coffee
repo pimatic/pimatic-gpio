@@ -44,7 +44,9 @@ module.exports = (env) ->
         @_state = lastState?.state?.value or false
 
       stateToSet = (if @config.inverted then not @_state else @_state)
-      @gpio = new Gpio @config.gpio, (if stateToSet then "high" else "low")
+      options =
+        debounceTimeout: @config.debounceTimeout if @config.debounceTimeout?
+      @gpio = new Gpio @config.gpio, (if stateToSet then "high" else "low"), options
       super()
 
     getState: () ->
@@ -65,13 +67,15 @@ module.exports = (env) ->
         @_setState(state)
       )
 
-  # ##GpioPresence Sensor
+  # ##GpioContact Sensor
   class GpioContact extends env.devices.ContactSensor
 
     constructor: (@config, lastState) ->
       @id = @config.id
       @name = @config.name
-      @gpio = new Gpio(@config.gpio, 'in', 'both')
+      options =
+        debounceTimeout: @config.debounceTimeout if @config.debounceTimeout?
+      @gpio = new Gpio(@config.gpio, 'in', 'both', options)
       @_contact = lastState?.contact?.value or false
 
       @_readContactValue().catch( (error) =>
@@ -107,7 +111,9 @@ module.exports = (env) ->
     constructor: (@config, lastState) ->
       @id = @config.id
       @name = @config.name
-      @gpio = new Gpio(@config.gpio, 'in', 'both')
+      options =
+        debounceTimeout: @config.debounceTimeout if @config.debounceTimeout?
+      @gpio = new Gpio(@config.gpio, 'in', 'both', options)
       @_presence = lastState?.presence?.value or false
 
       @_readPresenceValue().catch( (error) =>

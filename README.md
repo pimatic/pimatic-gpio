@@ -58,5 +58,6 @@ Use the GPIO numbers from the [RPi Low-level peripherals wiki page](http://elinu
       "id": "contact-sensor",
       "class": "GpioContact", 
       "name": "contact detector",
+      "debounceTimeout": 50,
       "gpio": 18 
     }
