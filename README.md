@@ -24,7 +24,7 @@ The `GpioSwitch` device additionally provides the optional `defaultState` proper
 initial switch state to the given value. If the property is not present the last state will be recovered from 
 database or it will be set to `false` if the last state cannot be obtained. 
 
-For device configuration options see the [device-config-schema](actuator-config-schema.html) file.
+For device configuration options see the [device-config-schema](device-config-schema.coffee) file.
 
 ### GPIO Pin Numbering
 
