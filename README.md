@@ -30,6 +30,12 @@ For device configuration options see the [device-config-schema](actuator-config-
 
 Use the GPIO numbers from the [RPi Low-level peripherals wiki page](http://elinux.org/RPi_Low-level_peripherals#General_Purpose_Input.2FOutput_.28GPIO.29). 
 
+### Internal Pull-up and Pull-down Resistors
+
+On Raspberry Pi, most GPIOs have either their pull-up or pull-down resistor
+activated by default. For further details, see 
+[Configuring pull-up and pull-down resistors](https://github.com/fivdi/onoff#configuring-pullup-and-pulldown-resistors).
+
 ### Device examples
 
 #### GpioSwitch Device ("active LOW" and "defaultState")
