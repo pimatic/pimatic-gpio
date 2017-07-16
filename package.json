@@ -32,16 +32,20 @@
   },
   "contributors": [
     {
+      "name": "sweet pi - sweet home",
+      "url": "https://github.com/sweetpi"
+    },
+    {
+      "name": "thost96",
+      "url": "https://github.com/thost96"
+    },
+    {
       "name": "Wiebe Nieuwenhuis",
       "url": "https://github.com/sweebee"
     },
     {
       "name": "Marcus Wittig",
       "url": "https://github.com/mwittig"
-    },
-    {
-      "name": "sweet pi - sweet home",
-      "url": "https://github.com/sweetpi"
     }
   ]
 }
