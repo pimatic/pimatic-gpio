@@ -49,6 +49,11 @@ module.exports = (env) ->
       @gpio = new Gpio @config.gpio, (if stateToSet then "high" else "low"), options
       super()
 
+    destroy: () ->
+      @gpio.unwatchAll()
+      @gpio.unexport()
+      super()
+
     getState: () ->
       if @_state? then Promise.resolve @_state
       @gpio.readAsync().then( (value) =>
@@ -91,6 +96,11 @@ module.exports = (env) ->
           @_setContactValue value
       super()
 
+    destroy: () ->
+      @gpio.unwatchAll()
+      @gpio.unexport()
+      super()
+
     _setContactValue: (value) ->
       assert value is 1 or value is 0
       state = (if value is 1 then yes else no)
@@ -127,6 +137,11 @@ module.exports = (env) ->
           env.logger.debug err.stack
         else
           @_setPresenceValue value
+      super()
+
+    destroy: () ->
+      @gpio.unwatchAll()
+      @gpio.unexport()
       super()
 
     _setPresenceValue: (value) ->
