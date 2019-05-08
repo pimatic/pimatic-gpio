@@ -1,6 +1,6 @@
 {
   "name": "pimatic-gpio",
-  "description": "Provides actuators and sensors for the raspberry pi gpio pins.",
+  "description": "Provides Actuators and Sensors for the Raspberry Pi GPIO Pins.",
   "author": "Oliver Schneider <oliverschneider89+sweetpi@gmail.com> (http://sweetpi.de)",
   "main": "gpio.coffee",
   "files": [
@@ -14,6 +14,11 @@
   ],
   "version": "0.9.0",
   "homepage": "http://github.com/pimatic/pimatic",
+  "keywords": [
+    "pimatic",
+    "pimatic-plugin",
+    "gpio"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/pimatic/pimatic-gpio.git"
@@ -27,8 +32,8 @@
     "pimatic": ">=0.9.0 <1.0.0"
   },
   "engines": {
-    "node": ">0.8.x",
-    "npm": ">1.1.x"
+    "node": ">=4",
+    "npm": ">=2"
   },
   "contributors": [
     {
