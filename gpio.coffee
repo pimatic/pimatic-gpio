@@ -1,12 +1,11 @@
 module.exports = (env) ->
 
-  # * pimatic imports.
+  # pimatic imports.
   Promise = env.require 'bluebird'
   assert = env.require 'cassert'
   _ = env.require 'lodash'
 
-  Gpio = env.Gpio or require('onoff').Gpio
-  Promise.promisifyAll(Gpio.prototype)
+  Gpio = require('onoff').Gpio
 
   class GpioPlugin extends env.plugins.Plugin
 
@@ -56,7 +55,7 @@ module.exports = (env) ->
 
     getState: () ->
       if @_state? then Promise.resolve @_state
-      @gpio.readAsync().then( (value) =>
+      @gpio.read().then( (value) =>
         _state = (if value is 1 then yes else no)
         if @config.inverted then @_state = not _state
         else @_state = _state
@@ -68,7 +67,7 @@ module.exports = (env) ->
       assert state is on or state is off
       if @config.inverted then _state = not state
       else _state = state
-      @gpio.writeAsync(if _state then 1 else 0).then( () =>
+      @gpio.write(if _state then 1 else 0).then( () =>
         @_setState(state)
       )
 
@@ -108,7 +107,7 @@ module.exports = (env) ->
       @_setContact state
 
     _readContactValue: ->
-      @gpio.readAsync().then( (value) =>
+      @gpio.read().then( (value) =>
         @_setContactValue value
         return @_contact 
       )
@@ -151,7 +150,7 @@ module.exports = (env) ->
       @_setPresence state
 
     _readPresenceValue: ->
-      @gpio.readAsync().then( (value) =>
+      @gpio.read().then( (value) =>
         @_setPresenceValue value
         return @_presence 
       )
