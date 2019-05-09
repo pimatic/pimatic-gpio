@@ -6,7 +6,7 @@ module.exports ={
     extensions: ["xConfirm", "xLink", "xOnLabel", "xOffLabel"]
     properties:
       gpio:
-        description: "The gpio pin"
+        description: "The GPIO pin"
         type: "number"
       inverted:
         description: "active low?"
@@ -27,7 +27,7 @@ module.exports ={
     extensions: ["xLink", "xOpenedLabel", "xClosedLabel"]
     properties:
       gpio:
-        description: "The gpio pin"
+        description: "The GPIO pin"
         type: "number"
       inverted:
         description: "LOW = closed?"
@@ -44,7 +44,7 @@ module.exports ={
     extensions: ["xLink", "xPresentLabel", "xAbsentLabel"]
     properties:
       gpio:
-        description: "The gpio pin"
+        description: "The GPIO pin"
         type: "number"
       inverted:
         description: "LOW = present?"
